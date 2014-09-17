@@ -156,7 +156,8 @@ class MavensMateProject(object):
         deploy_params = {
             "zip_file"          : zip_file,
             "rollback_on_error" : mm_compile_rollback_on_error,
-            "ret_xml"           : True
+            "ret_xml"           : True,
+            "ignore_warnings"   : True #deploying destructiveChanges.xml generates warnings if the resources are already deleted
         }
         deploy_result = config.sfdc_client.deploy(deploy_params)
         d = xmltodict.parse(deploy_result,postprocessor=util.xmltodict_postprocessor)
