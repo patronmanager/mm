@@ -358,13 +358,9 @@ class MavensMateProject(object):
                     dirnames.remove('.svn')
 
                 for filename in filenames:
-                    full_file_path = os.path.join(dirname, filename)
-                    if config.is_windows:
-                        if '\\src\\package.xml' not in full_file_path:
-                            os.remove(full_file_path)
-                    else:
-                        if '/src/package.xml' not in full_file_path:
-                            os.remove(full_file_path)
+                    if dirname == os.path.join(self.location,'src') and filename in ['package.xml','destructiveChanges.xml']:
+                        continue
+                    os.remove(os.path.join(dirname, filename))
 
             #replaces with retrieved metadata
             for dirname, dirnames, filenames in os.walk(os.path.join(self.location,"unpackaged")):
